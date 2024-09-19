@@ -1,0 +1,11 @@
+Source: pramanpatram  
+Maintainer: Aryan Karamtoth <aryankmmiv@outlook.com>
+Build-Depends: debhelper-compat (= 11)
+Standards-Version: 5.6.12
+Section: utils
+
+Package: pramanpatram  
+Priority: extra  
+Architecture: any
+Depends: python3, python3-pillow, python3-pandas
+Description: A Python Package to Generate Event Certificates.
