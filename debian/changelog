@@ -1,11 +1,5 @@
-pramanpatram (1.0ubuntu1) unstable; urgency=medium
+pramanpatram (1.0.2) noble; urgency=medium
 
-  * create
+  * Initial release. (Closes: #XXXXXX)
 
- -- aryan <aryan@thinkie>  Thu, 19 Sep 2024 20:11:34 +0530
-
-pramanpatram (1.0) unstable; urgency=medium
-
-* Initial release. (Closes: #nnnn)  <nnnn is the bug number of your ITP>
-
--- Aryan Karamtoth (SpaciousCoder78)<aryankmmiv@outlook.com>  Thu, 19 Sep 2024 18:37:31 +0530
+ -- Aryan Karamtoth <aryankmmiv@outlook.com>  Thu, 19 Sep 2024 22:12:31 +0530

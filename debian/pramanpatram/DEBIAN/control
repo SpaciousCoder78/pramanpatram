@@ -1,9 +1,0 @@
-Package: pramanpatram
-Version: 1.0ubuntu1
-Architecture: amd64
-Maintainer: Aryan Karamtoth <aryankmmiv@outlook.com>
-Installed-Size: 8
-Depends: python3, python3-pillow, python3-pandas
-Section: utils
-Priority: extra
-Description: A Python Package to Generate Event Certificates.
