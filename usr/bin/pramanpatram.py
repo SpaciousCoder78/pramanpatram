@@ -7,7 +7,22 @@ import pandas as pd
 from PIL import Image, ImageDraw, ImageFont
 import textwrap
 import tkinter as tk
-from tkinter import filedialog, messagebox
+from tkinter import filedialog, messagebox, ttk
+
+def browse_csv():
+    filename = filedialog.askopenfilename(filetypes=[("CSV files", "*.csv")])
+    csv_path_entry.delete(0, tk.END)
+    csv_path_entry.insert(0, filename)
+
+def browse_sample():
+    filename = filedialog.askopenfilename(filetypes=[("Image files", "*.jpg;*.jpeg;*.png")])
+    sample_path_entry.delete(0, tk.END)
+    sample_path_entry.insert(0, filename)
+
+def browse_folder():
+    foldername = filedialog.askdirectory()
+    certificate_path_entry.delete(0, tk.END)
+    certificate_path_entry.insert(0, foldername)
 
 def generate_certificates():
     csvPath = csv_path_entry.get()
@@ -96,54 +111,57 @@ root = tk.Tk()
 root.title("Pramanpatram")
 
 # Create and place the input fields
-tk.Label(root, text="CSV PATH").grid(row=0, column=0)
+tk.Label(root, text="CSV PATH").grid(row=0, column=0, padx=10, pady=5, sticky='e')
 csv_path_entry = tk.Entry(root, width=50)
-csv_path_entry.grid(row=0, column=1)
+csv_path_entry.grid(row=0, column=1, padx=10, pady=5)
+tk.Button(root, text="Browse", command=browse_csv).grid(row=0, column=2, padx=10, pady=5)
 
-tk.Label(root, text="Sample Certificate Path").grid(row=1, column=0)
+tk.Label(root, text="Sample Certificate Path").grid(row=1, column=0, padx=10, pady=5, sticky='e')
 sample_path_entry = tk.Entry(root, width=50)
-sample_path_entry.grid(row=1, column=1)
+sample_path_entry.grid(row=1, column=1, padx=10, pady=5)
+tk.Button(root, text="Browse", command=browse_sample).grid(row=1, column=2, padx=10, pady=5)
 
-tk.Label(root, text="X Coordinate of the Text").grid(row=2, column=0)
+tk.Label(root, text="X Coordinate of the Text").grid(row=2, column=0, padx=10, pady=5, sticky='e')
 textcoords_x_entry = tk.Entry(root, width=50)
-textcoords_x_entry.grid(row=2, column=1)
+textcoords_x_entry.grid(row=2, column=1, padx=10, pady=5)
 
-tk.Label(root, text="Y Coordinate of the Text").grid(row=3, column=0)
+tk.Label(root, text="Y Coordinate of the Text").grid(row=3, column=0, padx=10, pady=5, sticky='e')
 textcoords_y_entry = tk.Entry(root, width=50)
-textcoords_y_entry.grid(row=3, column=1)
+textcoords_y_entry.grid(row=3, column=1, padx=10, pady=5)
 
-tk.Label(root, text="Size of the Text").grid(row=4, column=0)
+tk.Label(root, text="Size of the Text").grid(row=4, column=0, padx=10, pady=5, sticky='e')
 text_size_entry = tk.Entry(root, width=50)
-text_size_entry.grid(row=4, column=1)
+text_size_entry.grid(row=4, column=1, padx=10, pady=5)
 
-tk.Label(root, text="Enter RGB values of the text colour:").grid(row=5, column=0)
-tk.Label(root, text="R Value").grid(row=6, column=0)
+tk.Label(root, text="Enter RGB values of the text colour:").grid(row=5, column=0, padx=10, pady=5, sticky='e')
+tk.Label(root, text="R Value").grid(row=6, column=0, padx=10, pady=5, sticky='e')
 r_value_entry = tk.Entry(root, width=50)
-r_value_entry.grid(row=6, column=1)
+r_value_entry.grid(row=6, column=1, padx=10, pady=5)
 
-tk.Label(root, text="G Value").grid(row=7, column=0)
+tk.Label(root, text="G Value").grid(row=7, column=0, padx=10, pady=5, sticky='e')
 g_value_entry = tk.Entry(root, width=50)
-g_value_entry.grid(row=7, column=1)
+g_value_entry.grid(row=7, column=1, padx=10, pady=5)
 
-tk.Label(root, text="B Value").grid(row=8, column=0)
+tk.Label(root, text="B Value").grid(row=8, column=0, padx=10, pady=5, sticky='e')
 b_value_entry = tk.Entry(root, width=50)
-b_value_entry.grid(row=8, column=1)
+b_value_entry.grid(row=8, column=1, padx=10, pady=5)
 
-tk.Label(root, text="Width of the Text").grid(row=9, column=0)
+tk.Label(root, text="Width of the Text").grid(row=9, column=0, padx=10, pady=5, sticky='e')
 text_width_entry = tk.Entry(root, width=50)
-text_width_entry.grid(row=9, column=1)
+text_width_entry.grid(row=9, column=1, padx=10, pady=5)
 
-tk.Label(root, text="Text to be written on the certificate").grid(row=10, column=0)
+tk.Label(root, text="Text to be written on the certificate").grid(row=10, column=0, padx=10, pady=5, sticky='e')
 certificate_text_entry = tk.Entry(root, width=50)
-certificate_text_entry.grid(row=10, column=1)
+certificate_text_entry.grid(row=10, column=1, padx=10, pady=5)
 
-tk.Label(root, text="Path of the folder where the certificates are to be saved").grid(row=11, column=0)
+tk.Label(root, text="Path of the folder where the certificates are to be saved").grid(row=11, column=0, padx=10, pady=5, sticky='e')
 certificate_path_entry = tk.Entry(root, width=50)
-certificate_path_entry.grid(row=11, column=1)
+certificate_path_entry.grid(row=11, column=1, padx=10, pady=5)
+tk.Button(root, text="Browse", command=browse_folder).grid(row=11, column=2, padx=10, pady=5)
 
 # Create and place the button
-generate_button = tk.Button(root, text="Generate Certificates", command=generate_certificates)
-generate_button.grid(row=12, column=0, columnspan=2)
+generate_button = tk.Button(root, text="Generate Certificates", command=generate_certificates, bg="blue", fg="white", font=("Helvetica", 12, "bold"))
+generate_button.grid(row=12, column=0, columnspan=3, pady=20)
 
 # Run the main loop
 root.mainloop()
