@@ -42,23 +42,41 @@ while True:
     if event == sg.WIN_CLOSED:
         break
     if event == 'Generate Certificates':
+        # Validation
+        if not values['csvPath'] or not values['samplePath'] or not values['textcoords_x'] or not values['textcoords_y'] or not values['textSize'] or not values['r_value'] or not values['g_value'] or not values['b_value'] or not values['textWidth'] or not values['certificateText'] or not values['certificatePath']:
+            sg.popup('Error', 'Please fill all the fields.')
+            continue
+
+        try:
+            textcoords_x = int(values['textcoords_x'])
+            textcoords_y = int(values['textcoords_y'])
+            textSize = int(values['textSize'])
+            r_value = int(values['r_value'])
+            g_value = int(values['g_value'])
+            b_value = int(values['b_value'])
+            textWidth = int(values['textWidth'])
+        except ValueError:
+            sg.popup('Error', 'Please enter valid numeric values for coordinates, size, RGB values, and text width.')
+            continue
+
         csvPath = values['csvPath']
         samplePath = values['samplePath']
-        textcoords_x = int(values['textcoords_x'])
-        textcoords_y = int(values['textcoords_y'])
-        textSize = int(values['textSize'])
-        r_value = int(values['r_value'])
-        g_value = int(values['g_value'])
-        b_value = int(values['b_value'])
-        textWidth = int(values['textWidth'])
         certificateText = values['certificateText']
         certificatePath = values['certificatePath']
 
         # read the csv file
-        persons = pd.read_csv(csvPath)
+        try:
+            persons = pd.read_csv(csvPath)
+        except Exception as e:
+            sg.popup('Error', f'Failed to read CSV file: {e}')
+            continue
 
         # find all columns that contain "Attendee" in their name
         name_columns = [col for col in persons.columns if "Attendee" in col]
+
+        if not name_columns:
+            sg.popup('Error', 'No columns with "Attendee" found in the CSV file.')
+            continue
 
         # iterate over the name columns
         for name_column in name_columns:
@@ -67,7 +85,12 @@ while True:
 
             # iterate over the names in the list
             for i in namelist:
-                im = Image.open(samplePath)
+                try:
+                    im = Image.open(samplePath)
+                except Exception as e:
+                    sg.popup('Error', f'Failed to open sample certificate image: {e}')
+                    continue
+
                 draw = ImageDraw.Draw(im)
                 location = (textcoords_y, textcoords_x)
                 text_color = (r_value, g_value, b_value)
@@ -85,6 +108,12 @@ while True:
                     draw.text(location, line, fill=text_color, font=selectFont)
                     location = (location[0], location[1] + 35)  # increase vertical spacing between lines
 
-                im.save(f"{certificatePath}/certificate_{i}.jpg")
+                try:
+                    im.save(f"{certificatePath}/certificate_{i}.jpg")
+                except Exception as e:
+                    sg.popup('Error', f'Failed to save certificate image: {e}')
+                    continue
+
+        sg.popup('Success', 'Certificates generated successfully!')
 
 window.close()
