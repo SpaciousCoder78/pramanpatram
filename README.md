@@ -20,3 +20,6 @@ Avaliable on ![Debian](https://img.shields.io/badge/Debian-D70A53?style=for-the-
   ```sh
   $ sudo apt install pramanpatram
   ```
+### For Windows 10 and above
+
+- Download the latest release's .exe file from <a href="https://github.com/SpaciousCoder78/pramanpatram/releases">Releases</a>
