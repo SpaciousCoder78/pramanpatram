@@ -99,6 +99,7 @@ def generate_certificates():
                 location = (location[0], location[1] + 35)  # increase vertical spacing between lines
 
             try:
+                im = im.convert("RGB")
                 im.save(f"{certificatePath}/certificate_{i}.jpg")
             except Exception as e:
                 messagebox.showerror("Error", f"Failed to save certificate image: {e}")
