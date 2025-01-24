@@ -7,6 +7,7 @@ import pandas as pd
 from PIL import Image, ImageDraw, ImageFont
 import textwrap
 import tkinter as tk
+from tkinter.font import Font
 from tkinter import filedialog, messagebox, ttk
 
 def browse_csv():
@@ -41,7 +42,7 @@ def generate_certificates():
     if not csvPath or not samplePath or not textcoords_x or not textcoords_y or not textSize or not r_value or not g_value or not b_value or not textWidth or not certificateText or not certificatePath:
         messagebox.showerror("Error", "Please fill all the fields.")
         return
-
+    
     try:
         textcoords_x = int(textcoords_x)
         textcoords_y = int(textcoords_y)
@@ -84,8 +85,7 @@ def generate_certificates():
             draw = ImageDraw.Draw(im)
             location = (textcoords_y, textcoords_x)
             text_color = (r_value, g_value, b_value)
-            selectFont = ImageFont.load_default()  # use the system's default font
-
+            selectFont = ImageFont.truetype("arial.ttf", textSize)  # Load a TrueType font with the specified size
             # format the text to be printed on the image
             text = f"{certificateText.replace('{name}', i)}"
 
